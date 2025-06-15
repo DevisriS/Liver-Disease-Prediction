@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Animate.css for animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        .appointment-row:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .pulse-animation {
+            animation: pulse 1.5s infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <header class="bg-blue-600 text-white py-4">
+        <div class="container mx-auto flex justify-between items-center px-4">
+            <h1 class="text-2xl font-bold">Admin Dashboard</h1>
+            <a href="/logout" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition duration-300">Logout</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <h2 class="text-3xl font-bold mb-6 text-gray-800">Appointments</h2>
+        <div class="overflow-x-auto bg-white rounded-lg shadow-lg">
+            <table class="min-w-full bg-white">
+                <thead class="bg-blue-50">
+                    <tr>
+                        <th class="py-3 px-6 text-left text-gray-700 font-bold">ID</th>
+                        <th class="py-3 px-6 text-left text-gray-700 font-bold">Name</th>
+                        <th class="py-3 px-6 text-left text-gray-700 font-bold">Problem</th>
+                        <th class="py-3 px-6 text-left text-gray-700 font-bold">Doctor Assigned</th>
+                        <th class="py-3 px-6 text-left text-gray-700 font-bold">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for appointment in appointments %}
+                    <tr class="appointment-row border-b border-gray-200 hover:bg-blue-50 transition duration-300">
+                        <td class="py-4 px-6 text-gray-700">{{ appointment.id }}</td>
+                        <td class="py-4 px-6 text-gray-700">{{ appointment.name }}</td>
+                        <td class="py-4 px-6 text-gray-700">{{ appointment.problem }}</td>
+                        <td class="py-4 px-6 text-gray-700">
+                            {% if appointment.doctor_assigned == "Not Assigned" %}
+                            <span class="text-red-500">Not Assigned</span>
+                            {% else %}
+                            <span class="text-green-600">Dr. {{ appointment.doctor_assigned }}</span>
+                            {% endif %}
+                        </td>
+                        <td class="py-4 px-6 flex space-x-2">
+                            {% if appointment.doctor_assigned == "Not Assigned" %}
+                            <form action="/assign_doctor/{{ appointment.id }}" method="post" class="flex items-center">
+                                <select name="doctor_name" required class="border border-gray-300 rounded-lg px-3 py-2 mr-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <option value="">Select Doctor</option>
+                                    {% for doctor in doctors %}
+                                        <option value="{{ doctor.name }}">Dr. {{ doctor.name }}</option>
+                                    {% endfor %}
+                                </select>
+                                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg pulse-animation transition duration-300">Assign</button>
+                            </form>
+                            {% endif %}
+                            {% if appointment.status != "Approved" %}
+                            <form action="/approve_appointment/{{ appointment.id }}" method="post">
+                                <button type="submit" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition duration-300">Approve</button>
+                            </form>
+                            {% else %}
+                            <span class="text-green-600 font-semibold">Approved</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class="bg-blue-600 text-white py-4 mt-8">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2023 Admin Dashboard. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const rows = document.querySelectorAll(".appointment-row");
+            rows.forEach((row, index) => {
+                row.style.opacity = "0";
+                setTimeout(() => {
+                    row.style.transition = "opacity 0.5s ease";
+                    row.style.opacity = "1";
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

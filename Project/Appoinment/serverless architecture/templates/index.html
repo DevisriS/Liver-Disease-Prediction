@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Appointment System</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Animate.css for animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Custom CSS for additional styling -->
+    <style>
+        /* Custom gradient background */
+        body {
+            background: linear-gradient(135deg, #6b46c1, #4299e1);
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Custom hover effect for buttons */
+        .hover-effect:hover {
+            transform: translateY(-5px);
+            transition: transform 0.3s ease;
+        }
+
+        /* Pulse animation for buttons */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <!-- Header Section -->
+    <header class="bg-white shadow-lg">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-3xl font-bold text-blue-600">Hospital Appointment System</h1>
+            <nav class="space-x-4">
+                <a href="/register" class="text-blue-600 hover:text-blue-800">Register</a>
+                <a href="/login" class="text-blue-600 hover:text-blue-800">Login</a>
+                <a href="/admin" class="text-blue-600 hover:text-blue-800">Admin Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="text-center py-20 bg-white bg-opacity-90">
+        <div class="container mx-auto px-4">
+            <h2 class="text-5xl font-bold text-gray-800 mb-6 animate__animated animate__fadeIn">
+                Welcome to the Hospital Appointment System
+            </h2>
+            <p class="text-xl text-gray-600 mb-8 animate__animated animate__fadeIn animate__delay-1s">
+                Book appointments with top doctors, manage your health records, and get the best care.
+            </p>
+            <div class="space-x-4">
+                <a href="/register"
+                    class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg hover-effect pulse-animation">
+                    Get Started
+                </a>
+                <a href="/login"
+                    class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg hover-effect">
+                    Login
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">Why Choose Us?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center hover-effect">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2961/2961347.png" alt="Easy Booking" class="w-20 h-20 mx-auto mb-4">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Easy Booking</h3>
+                    <p class="text-gray-600">Book appointments with just a few clicks. Fast, simple, and hassle-free.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center hover-effect">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2961/2961354.png" alt="Top Doctors" class="w-20 h-20 mx-auto mb-4">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Top Doctors</h3>
+                    <p class="text-gray-600">Access a network of experienced and certified doctors.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg text-center hover-effect">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2961/2961367.png" alt="Health Records" class="w-20 h-20 mx-auto mb-4">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Health Records</h3>
+                    <p class="text-gray-600">Manage and track your medical history in one place.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">What Our Patients Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                    <p class="text-gray-600 mb-4">"The Hospital Appointment System made booking appointments so easy. I highly recommend it!"</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/women/75.jpg" alt="User" class="w-10 h-10 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold text-gray-800">Jane Doe</h4>
+                            <p class="text-sm text-gray-600">Patient</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="bg-gray-100 p-6 rounded-lg shadow-lg">
+                    <p class="text-gray-600 mb-4">"I love how I can access my health records anytime. It's a game-changer!"</p>
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User" class="w-10 h-10 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold text-gray-800">John Smith</h4>
+                            <p class="text-sm text-gray-600">Patient</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-blue-600 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2023 Hospital Appointment System. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for additional interactivity -->
+    <script>
+        // Add fade-in animation to the hero section
+        document.addEventListener("DOMContentLoaded", function () {
+            const heroSection = document.querySelector(".animate__fadeIn");
+            heroSection.style.opacity = "0";
+            setTimeout(() => {
+                heroSection.style.transition = "opacity 0.5s ease";
+                heroSection.style.opacity = "1";
+            }, 100);
+        });
+    </script>
+</body>
+</html>

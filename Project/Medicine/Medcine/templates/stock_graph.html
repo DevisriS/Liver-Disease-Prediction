@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Stock Graph | Inventory Dashboard</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #4e73df;
+            --secondary-color: #1cc88a;
+            --danger-color: #e74a3b;
+            --warning-color: #f6c23e;
+            --dark-color: #5a5c69;
+            --light-color: #f8f9fc;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+        }
+        
+        .navbar {
+            background-color: white;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+            padding: 0.8rem 1rem;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .nav-link {
+            color: var(--dark-color);
+            font-weight: 500;
+            margin: 0 8px;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background-color: rgba(78, 115, 223, 0.1);
+            color: var(--primary-color);
+        }
+        
+        .nav-link i {
+            margin-right: 8px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .main-container {
+            padding: 30px;
+            margin-top: 20px;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .card-header {
+            background-color: white;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 20px;
+            border-radius: 10px 10px 0 0 !important;
+        }
+        
+        .card-title {
+            font-weight: 600;
+            color: var(--dark-color);
+            margin: 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .card-title i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .graph-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .graph-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px;
+            flex: 1;
+            min-width: 200px;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .stat-card.warning {
+            border-left-color: var(--warning-color);
+        }
+        
+        .stat-card.danger {
+            border-left-color: var(--danger-color);
+        }
+        
+        .stat-card.success {
+            border-left-color: var(--secondary-color);
+        }
+        
+        .stat-title {
+            font-size: 14px;
+            color: var(--dark-color);
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .stat-change {
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .stat-change.up {
+            color: var(--secondary-color);
+        }
+        
+        .stat-change.down {
+            color: var(--danger-color);
+        }
+        
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.2);
+        }
+        
+        .dropdown-item {
+            padding: 8px 15px;
+        }
+        
+        .dropdown-item:hover {
+            background-color: rgba(78, 115, 223, 0.1);
+            color: var(--primary-color);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: #2e59d9;
+            border-color: #2653d4;
+        }
+        
+        .graph-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .graph-type-selector {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-graph-type {
+            border: 1px solid #d1d3e2;
+            background: white;
+            color: var(--dark-color);
+            padding: 8px 15px;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        
+        .btn-graph-type.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .btn-graph-type:hover {
+            background-color: #f8f9fa;
+        }
+        
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 15px;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+            }
+            
+            .graph-controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .graph-type-selector {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        
+    <!-- Main Content -->
+    <div class="container-fluid main-container">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">
+                            <i class="fas fa-chart-bar"></i> Product Stock Levels
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        
+                        
+                        <div class="graph-container">
+                            <img src="data:image/png;base64,{{ img_data }}" alt="Stock Graph" class="graph-img">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-title">Total Products</div>
+                        <div class="stat-value">142</div>
+                        <div class="stat-change up">
+                            <i class="fas fa-arrow-up"></i> 12% from last month
+                        </div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-title">Low Stock Items</div>
+                        <div class="stat-value">18</div>
+                        <div class="stat-change down">
+                            <i class="fas fa-arrow-down"></i> 3% from last month
+                        </div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-title">Out of Stock</div>
+                        <div class="stat-value">5</div>
+                        <div class="stat-change up">
+                            <i class="fas fa-arrow-up"></i> 2 from last week
+                        </div>
+                    </div>
+                    <div class="stat-card success">
+                        <div class="stat-title">High Stock Items</div>
+                        <div class="stat-value">64</div>
+                        <div class="stat-change up">
+                            <i class="fas fa-arrow-up"></i> 8% from last month
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Activate graph type buttons
+        document.querySelectorAll('.btn-graph-type').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.btn-graph-type').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+                // Here you would typically update the graph via AJAX
+                // For this demo, we're just changing the button state
+            });
+        });
+        
+        // Simulate loading for demo purposes
+        document.addEventListener('DOMContentLoaded', function() {
+            const graphImg = document.querySelector('.graph-img');
+            graphImg.style.opacity = '0';
+            setTimeout(() => {
+                graphImg.style.transition = 'opacity 0.5s ease';
+                graphImg.style.opacity = '1';
+            }, 300);
+        });
+    </script>
+</body>
+</html>

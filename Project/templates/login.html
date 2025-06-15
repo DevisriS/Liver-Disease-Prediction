@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liver Disease Prediction</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f0f2f5;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background: url('static/j.jpg') center center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .hero a.cta-button {
+            padding: 15px 30px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero a.cta-button:hover {
+            background-color: #45a049;
+        }
+
+        /* Information Section */
+        .info-section {
+            padding: 60px 20px;
+            text-align: center;
+            background-color: #fff;
+        }
+
+        .info-section h2 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .info-section p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .info-cards {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .info-card {
+            background-color: #f7f7f7;
+            padding: 20px;
+            width: 300px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .info-card i {
+            font-size: 50px;
+            color: #4CAF50;
+            margin-bottom: 15px;
+        }
+
+        .info-card h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .info-card p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        /* Login Section */
+        .login-section {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #3c8dad, #654ea3);
+            color: white;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 8px;
+            max-width: 400px;
+            margin: 0 auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h2 {
+            color: #333;
+            font-size: 24px;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        label {
+            font-size: 14px;
+            color: #555;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0 16px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .register-link {
+            text-align: center;
+            margin-top: 16px;
+        }
+
+        .register-link a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 20px;
+            text-align: center;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .footer p {
+            margin: 0;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+            .info-cards {
+                flex-direction: column;
+            }
+            .info-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="overlay"></div>
+        <div class="hero-content">
+            <h1>Predict Liver Disease with Ease</h1>
+            <p>Early detection can save lives. Our advanced liver disease prediction tool uses cutting-edge technology to predict the risk factors and help you stay healthy.</p>
+            <br><br>
+            <a href="#login-section" class="cta-button">Get Started</a>
+            <a href="http://127.0.0.1:5001/" class="cta-button">Book Appointment</a>
+            <a href="http://127.0.0.1:5002/" class="cta-button">Medicines</a>
+        </div>
+    </div>
+
+    <!-- Information Section -->
+    <section class="info-section">
+        <h2>About Liver Disease</h2>
+        <p>Liver diseases are often caused by excessive alcohol consumption, fatty liver, and infections like hepatitis. By predicting your risk early, you can take preventative measures.</p>
+
+        <div class="info-cards">
+            <div class="info-card">
+                <i class="fas fa-wine-glass-alt"></i>
+                <h3>Alcohol</h3>
+                <p>Excessive alcohol consumption can cause liver inflammation and cirrhosis.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-hamburger"></i>
+                <h3>Fatty Liver</h3>
+                <p>A buildup of fat in the liver can lead to serious health issues if untreated.</p>
+            </div>
+            <div class="info-card">
+                <i class="fas fa-virus"></i>
+                <h3>Hepatitis</h3>
+                <p>Viral infections such as Hepatitis B and C are common causes of liver damage.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Section -->
+    <section id="login-section" class="login-section">
+        <div class="container">
+            <h2>Login to Your Account</h2>
+            <form method="POST">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+
+                <input type="submit" value="Login">
+            </form>
+            <div class="register-link">
+                <p>Don't have an account? <a href="{{ url_for('register') }}">Register here</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 Liver Disease Prediction. All Rights Reserved.</p>
+    </div>
+
+</body>
+</html>

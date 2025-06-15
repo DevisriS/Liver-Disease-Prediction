@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liver Prediction Model</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* Full-Screen Video Background */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .video-background {
+            position: fixed; /* Fixed to keep in place */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* Send the video behind other content */
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed; /* Fixed to keep in place */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Dark overlay to enhance readability */
+            z-index: 0; /* Ensure overlay is above video but behind content */
+        }
+
+        /* Scrollable Content */
+        .content {
+            position: relative;
+            z-index: 1; /* Ensure content is above overlay */
+            height: 100%;
+            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Form Container */
+        .ml-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto; /* Center the form */
+            text-align: center;
+        }
+
+        .ml-container h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 700;
+        }
+
+        /* Form Styling */
+        .ml-container h3 {
+            color: #333;
+            margin: 15px 0 10px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        input {
+            width: calc(100% - 24px);
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            text-align: center;
+            background-color: #f4f4f4;
+            color: #333;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        input::placeholder {
+            color: #aaa;
+        }
+
+        input:focus {
+            outline: none;
+            background-color: #e0e0e0;
+        }
+
+        /* Submit Button Styling */
+        button#sub {
+            background-color: #2575fc;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        button#sub:hover {
+            background-color: #1e60d3;
+        }
+
+        .footer-description {
+            margin-top: 20px;
+            color: #555;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Video Background -->
+    <video class="video-background" autoplay muted loop>
+        <source src="static/Progression of Liver Disease Overview - Animated.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Scrollable Content -->
+    <div class="content">
+        <!-- Form Section -->
+        <div class="ml-container">
+            <h2>Liver Disease Prediction</h2>
+
+            <form action="{{ url_for('predict') }}" method="POST">
+                <h3>Age</h3>
+                <input id="first" name="Age" placeholder="in Year" required="required">
+
+                <h3>Gender</h3>
+                <input id="second" name="Gender" placeholder="Male = 1, Female = 0" required="required">
+
+                <h3>Total Bilirubin</h3>
+                <input id="third" name="Total_Bilirubin" placeholder="Total Bilirubin" required="required">
+
+                <h3>Alkaline Phosphotase</h3>
+                <input id="fourth" name="Alkaline_Phosphotase" placeholder="Alkaline Phosphotase" required="required">
+
+                <h3>Alamine Aminotransferase</h3>
+                <input id="fifth" name="Alamine_Aminotransferase" placeholder="Alamine Aminotransferase" required="required">
+
+                <h3>Aspartate Aminotransferase</h3>
+                <input id="sixth" name="Aspartate_Aminotransferase" placeholder="Aspartate Aminotransferase" required="required">
+
+                <h3>Total Proteins</h3>
+                <input id="seventh" name="Total_Protiens" placeholder="Total Proteins" required="required">
+
+                <h3>Albumin</h3>
+                <input id="eight" name="Albumin" placeholder="Albumin" required="required">
+
+                <h3>Albumin and Globulin Ratio</h3>
+                <input id="ninth" name="Albumin_and_Globulin_Ratio" placeholder="Albumin and Globulin Ratio" required="required">
+
+                <button id="sub" type="submit">Submit</button>
+            </form>
+
+            <p class='footer-description'>©2024 Liver Disease Prediction Model</p>
+        </div>
+    </div>
+</body>
+
+</html>

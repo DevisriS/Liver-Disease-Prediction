@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* Inline CSS for styling */
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9; /* Fallback color */
+    background-image: url('https://i.pinimg.com/originals/2b/32/b5/2b32b59dbfc427812eef579985234524.gif'); /* Path to your GIF */
+    background-size: cover; /* Ensures the GIF covers the entire background */
+    background-position: center; /* Centers the GIF */
+    background-repeat: no-repeat; /* Prevents the GIF from repeating */
+    margin: 0;
+    padding: 0;
+}
+
+        .container {
+            max-width: 500px;
+            margin: 100px auto;
+            
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label, input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        p {
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .alert {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Login</h2>
+
+        <!-- Display error message if login fails -->
+        {% if flash_message %}
+            <div class="alert alert-danger">
+                {{ flash_message }}
+            </div>
+        {% endif %}
+
+        <form method="POST">
+            <label for="username">Username:</label>
+            <input type="text" name="username" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
+            
+            <button type="submit">Login</button>
+        </form>
+        <form action="{{ url_for('adminlogin') }}" method="GET" class="mt-2">
+            <button type="submit" class="btn btn-secondary" style="margin-top: 10px; background-color: #6c757d;">Admin Login</button>
+        </form>
+
+        <p>Don't have an account? <a href="/register">Register</a></p>
+    </div>
+
+    <!-- Bootstrap JS (for animations) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

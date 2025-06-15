@@ -1,0 +1,9 @@
+workflow
+      this project based on 2 users admin and users admin login success vies users lisk ,stock list and report data 
+      if user login buy medicins ,view historys
+
+steps for run:
+
+1.open project and set project path on cmd
+2.run commend * python app.py*
+3.copy url and past to servers

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Animate.css for animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Custom CSS for additional styling -->
+    <style>
+        /* Custom gradient background */
+        body {
+            background: linear-gradient(135deg, #6b46c1, #4299e1);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Custom hover effect for the book button */
+        .book-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Pulse animation for the book button */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Appointment Form Container -->
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md animate__animated animate__fadeIn">
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Book an Appointment</h2>
+        <form method="post" class="space-y-6">
+            <!-- Name Field -->
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                <input type="text" id="name" name="name" required
+                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Enter your name">
+            </div>
+            <!-- Age Field -->
+            <div>
+                <label for="age" class="block text-sm font-medium text-gray-700">Age</label>
+                <input type="number" id="age" name="age" required
+                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Enter your age">
+            </div>
+            <!-- Problem Field -->
+            <div>
+                <label for="problem" class="block text-sm font-medium text-gray-700">Problem</label>
+                <input type="text" id="problem" name="problem" required
+                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Describe your problem">
+            </div>
+            <!-- Location Field -->
+            <div>
+                <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
+                <input type="text" id="location" name="location" required
+                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Enter your location">
+            </div>
+            <!-- History of Problems Field -->
+            <div>
+                <label for="history" class="block text-sm font-medium text-gray-700">History of Problems</label>
+                <input type="text" id="history" name="history" required
+                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Enter your medical history">
+            </div>
+            <!-- Doctor Selection Field -->
+            <div>
+                <label for="doctor_name" class="block text-sm font-medium text-gray-700">Select Doctor</label>
+                <select id="doctor_name" name="doctor_name" required
+                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <option value="">Choose a doctor</option>
+                    {% for doctor in doctors %}
+                        <option value="{{ doctor.name }}">Dr. {{ doctor.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <!-- Book Button -->
+            <div>
+                <button type="submit"
+                    class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg book-button pulse-animation hover:bg-blue-700 transition duration-300">
+                    Book Appointment
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- JavaScript for additional interactivity -->
+    <script>
+        // Add fade-in animation to the form container
+        document.addEventListener("DOMContentLoaded", function () {
+            const formContainer = document.querySelector(".animate__fadeIn");
+            formContainer.style.opacity = "0";
+            setTimeout(() => {
+                formContainer.style.transition = "opacity 0.5s ease";
+                formContainer.style.opacity = "1";
+            }, 100);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Animate.css for animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- Custom CSS for additional styling -->
+    <style>
+        /* Custom gradient background */
+        body {
+            background: linear-gradient(135deg, #6b46c1, #4299e1);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Custom hover effect for buttons */
+        .hover-effect:hover {
+            transform: translateY(-2px);
+            transition: transform 0.3s ease;
+        }
+
+        /* Pulse animation for buttons */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Register Form Container -->
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md animate__animated animate__fadeIn">
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Register</h2>
+        <form method="post" class="space-y-6">
+            <!-- Name Field -->
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                <input type="text" id="name" name="name" required
+                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Enter your name">
+            </div>
+            <!-- Email Field -->
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" id="email" name="email" required
+                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Enter your email">
+            </div>
+            <!-- Password Field -->
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" id="password" name="password" required
+                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Enter your password">
+            </div>
+            <!-- Age Field -->
+            <div>
+                <label for="age" class="block text-sm font-medium text-gray-700">Age</label>
+                <input type="number" id="age" name="age" required
+                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Enter your age">
+            </div>
+            <!-- Location Field -->
+            <div>
+                <label for="location" class="block text-sm font-medium text-gray-700">Location</label>
+                <input type="text" id="location" name="location" required
+                    class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    placeholder="Enter your location">
+            </div>
+            <!-- Register Button -->
+            <div>
+                <button type="submit"
+                    class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover-effect pulse-animation hover:bg-blue-700 transition duration-300">
+                    Register
+                </button>
+            </div>
+        </form>
+        <p class="text-center text-gray-600 mt-6">
+            Already have an account? <a href="/login" class="text-blue-600 hover:text-blue-800">Login here</a>
+        </p>
+    </div>
+
+    <!-- JavaScript for additional interactivity -->
+    <script>
+        // Add fade-in animation to the form container
+        document.addEventListener("DOMContentLoaded", function () {
+            const formContainer = document.querySelector(".animate__fadeIn");
+            formContainer.style.opacity = "0";
+            setTimeout(() => {
+                formContainer.style.transition = "opacity 0.5s ease";
+                formContainer.style.opacity = "1";
+            }, 100);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Medicines</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #4e73df;
+            --secondary-color: #1cc88a;
+            --danger-color: #e74a3b;
+            --dark-color: #5a5c69;
+        }
+        
+        body {
+            background-color: #f8f9fc;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .navbar {
+            background-color: white;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+            padding: 0.5rem 1rem;
+        }
+        
+        .navbar-brand {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+        
+        .nav-link {
+            color: var(--dark-color);
+            font-weight: 500;
+            margin: 0 5px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .nav-link:hover {
+            background-color: #f8f9fa;
+            color: var(--primary-color);
+        }
+        
+        .nav-link i {
+            margin-right: 5px;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin-top: 30px;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.1);
+        }
+        
+        h2 {
+            text-align: center;
+            color: var(--dark-color);
+            font-weight: 600;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: var(--primary-color);
+            margin: 10px auto;
+        }
+        
+        .form-group label {
+            font-weight: 500;
+            color: var(--dark-color);
+            margin-bottom: 8px;
+        }
+        
+        .form-control {
+            border-radius: 6px;
+            padding: 12px 15px;
+            border: 1px solid #d1d3e2;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            padding: 12px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2e59d9;
+            border-color: #2653d4;
+            transform: translateY(-1px);
+        }
+        
+        .btn-block {
+            border-radius: 6px;
+        }
+        
+        .file-input-label {
+            display: block;
+            padding: 12px;
+            background-color: #f8f9fc;
+            border: 1px dashed #d1d3e2;
+            border-radius: 6px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .file-input-label:hover {
+            border-color: var(--primary-color);
+            background-color: #f0f3ff;
+        }
+        
+        .file-input-label i {
+            font-size: 24px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .medicine-icon {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <i class="fas fa-clinic-medical"></i> PharmaCare
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/view_stack">
+                        <i class="fas fa-home"></i> Stock
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/view_users">
+                        <i class="fas fa-pills"></i> Users List
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/stock_graph">
+                        <i class="fas fa-chart-bar"></i> Reports
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <i class="fas fa-pills medicine-icon"></i>
+        <h2>ADD NEW MEDICINE</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Medicine Name</label>
+                <input type="text" class="form-control" name="name" placeholder="Enter medicine name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Quantity</label>
+                <input type="number" class="form-control" name="quantity" placeholder="Enter quantity" required>
+            </div>
+
+            <div class="form-group">
+                <label for="brand">Brand</label>
+                <input type="text" class="form-control" name="brand" placeholder="Enter brand name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price (₹)</label>
+                <input type="number" step="0.01" class="form-control" name="price" placeholder="Enter price" required>
+            </div>
+
+            <div class="form-group">
+                <label for="details">Details</label>
+                <textarea class="form-control" name="details" rows="3" placeholder="Enter medicine details" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="image">Medicine Image</label>
+                <label for="image" class="file-input-label">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Click to upload medicine image</p>
+                    <small class="text-muted">JPEG, PNG, or JPG (Max. 5MB)</small>
+                </label>
+                <input type="file" class="file-input" id="image" name="image" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">
+                <i class="fas fa-plus-circle"></i> Add Medicine
+            </button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <script>
+        // Update file input label with selected file name
+        document.getElementById('image').addEventListener('change', function(e) {
+            const fileName = e.target.files[0] ? e.target.files[0].name : 'No file selected';
+            const label = document.querySelector('.file-input-label p');
+            label.textContent = fileName;
+        });
+    </script>
+</body>
+</html>

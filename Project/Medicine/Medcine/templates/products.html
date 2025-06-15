@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: #007bff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #ffdd57;
+        }
+
+        /* Container */
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            color: #444;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        /* Search Bar */
+        .search-bar {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .search-bar input {
+            width: 300px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-bar input:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+        }
+
+        /* Product List */
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .product-card {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 220px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .product-name {
+            font-size: 18px;
+            font-weight: 500;
+            color: #444;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 16px;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        .buy-form input {
+            width: 60px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .buy-form button {
+            background: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .buy-form button:hover {
+            background: #0056b3;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .product-card {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* Chatbot Icon */
+        .chatbot-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #007bff;
+            color: #fff;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .chatbot-icon:hover {
+            background: #0056b3;
+        }
+
+        /* Chatbot Window */
+        .chatbot-window {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            width: 300px;
+            height: 400px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            overflow-y: auto;
+        }
+
+        .chatbot-window header {
+            background: #007bff;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .chatbot-window .messages {
+            padding: 10px;
+            height: 300px;
+            overflow-y: auto;
+        }
+
+        .chatbot-window .messages .message {
+            margin-bottom: 10px;
+        }
+
+        .chatbot-window .messages .user {
+            text-align: right;
+        }
+
+        .chatbot-window .messages .bot {
+            text-align: left;
+        }
+
+        .chatbot-window footer {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+        }
+
+        .chatbot-window footer input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .chatbot-window footer button {
+            margin-left: 10px;
+            padding: 10px 20px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .chatbot-window footer button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div>
+            <a href=" " class="nav-link">Home</a>
+            <a href="/profile" class="nav-link">Profile</a>
+            <a href="/about" class="nav-link">About</a>
+        </div>
+    </div>
+
+    <!-- Container -->
+    <div class="container">
+        <h2>Products</h2>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" id="search" class="form-control" placeholder="Search for a product...">
+        </div>
+
+        <!-- Product List -->
+        <div class="product-list" id="product-list">
+            {% for product in products %}
+            <div class="product-card" data-name="{{ product[1] }}">
+                <img src="{{ product[2] }}" alt="{{ product[1] }}">
+                <div class="product-name">{{ product[1] }}</div>
+                <div class="product-price">₹{{ product[4] }}</div>
+                <form action="{{ url_for('buy_product', product_id=product[0]) }}" method="POST" class="buy-form">
+                    <input type="number" name="quantity" min="1" max="{{ product[3] }}" value="1" required>
+                    <button type="submit" class="btn btn-primary">Buy</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Chatbot Icon -->
+    <div class="chatbot-icon" id="chatbot-icon">🤖</div>
+
+    <!-- Chatbot Window -->
+    <div class="chatbot-window" id="chatbot-window">
+        <header>Chatbot</header>
+        <div class="messages" id="messages"></div>
+        <footer>
+            <input type="text" id="chat-input" placeholder="Type a message...">
+            <button id="send-btn">Send</button>
+        </footer>
+    </div>
+
+    <!-- JavaScript for Search Functionality -->
+    <script>
+        // Search Functionality
+        const searchInput = document.getElementById('search');
+        const productCards = document.querySelectorAll('.product-card');
+
+        searchInput.addEventListener('input', () => {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            productCards.forEach(card => {
+                const productName = card.getAttribute('data-name').toLowerCase();
+                if (productName.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Chatbot Functionality
+        const chatbotIcon = document.getElementById('chatbot-icon');
+        const chatbotWindow = document.getElementById('chatbot-window');
+        const messages = document.getElementById('messages');
+        const chatInput = document.getElementById('chat-input');
+        const sendBtn = document.getElementById('send-btn');
+
+        chatbotIcon.addEventListener('click', () => {
+            chatbotWindow.style.display = 'block';
+        });
+
+        sendBtn.addEventListener('click', () => {
+            sendMessage();
+        });
+
+        chatInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            const userMessage = chatInput.value.trim();
+            if (userMessage === '') return;
+
+            addMessage('user', userMessage);
+            chatInput.value = '';
+
+            fetch('/chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: userMessage })
+            })
+            .then(response => response.json())
+            .then(data => {
+                addMessage('bot', data.response);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        function addMessage(sender, message) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', sender);
+            messageElement.textContent = message;
+            messages.appendChild(messageElement);
+            messages.scrollTop = messages.scrollHeight;
+        }
+    </script>
+</body>
+</html>
